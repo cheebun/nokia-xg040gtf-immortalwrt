@@ -1,0 +1,9 @@
+#!/bin/sh
+# Default LAN address for nokia-xg040gtf-immortalwrt
+[ "$(uci -q get network.lan.ipaddr)" = "192.168.1.1" ] || \
+[ "$(uci -q get network.lan.ipaddr)" = "192.168.1.1/24" ] || exit 0
+uci -q delete network.lan.ipaddr
+uci -q delete network.lan.netmask
+uci add_list network.lan.ipaddr='192.168.200.1/24'
+uci commit network
+exit 0

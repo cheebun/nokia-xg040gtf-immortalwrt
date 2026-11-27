@@ -36,3 +36,5 @@ git-src
 .ccache
 .sccache
 .vscode*
+/package/mosdns
+/package/v2ray-geodata
