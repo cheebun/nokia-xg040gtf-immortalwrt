@@ -1,0 +1,11 @@
+# MosDNS Rules
+domain:dm.wo.com.cn
+domain:fxltsbl.com
+domain:zzhc.vnet.cn
+domain:typdm.tydevice.com
+domain:event-log.cnbj1.mi-fds.com
+domain:detection-aigc.engine.miui.com
+domain:api.installer.xiaomi.com
+domain:virus-engine.sec.miui.com
+domain:t1.a.market.xiaomi.com
+domain:t5.a.market.xiaomi.com

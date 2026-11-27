@@ -1,0 +1,27 @@
+diff --git i/luci-app-mosdns/htdocs/luci-static/resources/view/mosdns/basic.js w/luci-app-mosdns/htdocs/luci-static/resources/view/mosdns/basic.js
+index 443ed17..7a51723 100644
+--- i/luci-app-mosdns/htdocs/luci-static/resources/view/mosdns/basic.js
++++ w/luci-app-mosdns/htdocs/luci-static/resources/view/mosdns/basic.js
+@@ -221,7 +221,7 @@ return view.extend({
+ 		o.value('h3://dns.alidns.com/dns-query', _('Aliyun Public DNS (DNS over HTTP/3)'));
+ 		o.value('https://doh.360.cn/dns-query', _('360 Public DNS (DNS over HTTPS)'));
+ 		o.default = '119.29.29.29';
+-		o.depends('custom_local_dns', '1');
++		o.depends('configfile', '/var/etc/mosdns.json');
+ 
+ 		o = s.taboption('basic', form.DynamicList, 'remote_dns', _('Remote DNS server'));
+ 		o.value('tls://1.1.1.1', _('CloudFlare Public DNS (1.1.1.1)'));
+diff --git i/luci-app-mosdns/root/usr/share/mosdns/mosdns.uc w/luci-app-mosdns/root/usr/share/mosdns/mosdns.uc
+index 7b1a1bc..a701e78 100755
+--- i/luci-app-mosdns/root/usr/share/mosdns/mosdns.uc
++++ w/luci-app-mosdns/root/usr/share/mosdns/mosdns.uc
+@@ -58,6 +58,9 @@ function interface_dns() {
+ 				}
+ 			}
+ 		}
++		/* nokia-xg040gtf: append extra China DNS (local_dns) after WAN-provided DNS */
++		for (let s in to_array(uci_cursor.get('mosdns', 'config', 'local_dns')))
++			if (index(dns_list, s) < 0) push(dns_list, s);
+ 	}
+ 
+ 	if (length(dns_list) === 0) {

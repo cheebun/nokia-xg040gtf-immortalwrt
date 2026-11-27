@@ -1,18 +1,11 @@
 #!/bin/sh
-# dnsmasq forwards only to mosdns (same as 10.18.0.1, minus notinterface wt0)
+# dnsmasq forwards only to mosdns (mosdns redirect=1 also enforces this)
 uci -q batch <<-EOT
 	delete dhcp.@dnsmasq[0].server
 	add_list dhcp.@dnsmasq[0].server='127.0.0.1#5354'
 	set dhcp.@dnsmasq[0].noresolv='1'
 	set dhcp.@dnsmasq[0].cachesize='0'
 	set dhcp.@dnsmasq[0].rebind_protection='0'
-	set dhcp.@dnsmasq[0].addsubnet='32,128'
-	set dhcp.@dnsmasq[0].stripsubnet='1'
 	commit dhcp
 EOT
-# do not accept ISP-advertised DNS (DHCP/PPPoE/DHCPv6/RA)
-for i in wan wan6; do
-	uci -q get network.$i >/dev/null && uci set network.$i.peerdns='0'
-done
-uci commit network
 exit 0
