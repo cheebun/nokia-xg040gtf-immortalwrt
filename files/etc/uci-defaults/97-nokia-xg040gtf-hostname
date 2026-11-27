@@ -1,0 +1,7 @@
+#!/bin/sh
+# Default hostname for nokia-xg040gtf-immortalwrt (only replace the stock default)
+[ "$(uci -q get system.@system[0].hostname)" = "ponwrt" ] || exit 0
+uci set system.@system[0].hostname='OpenWRT'
+uci commit system
+echo OpenWRT > /proc/sys/kernel/hostname
+exit 0
