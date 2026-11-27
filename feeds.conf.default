@@ -9,3 +9,4 @@ src-git pon_userspace https://github.com/pbs05/openwrt-pon-userspace.git
 #src-git oldpackages http://git.openwrt.org/packages.git
 #src-link custom /usr/src/openwrt/custom-feed
 src-git vantage https://github.com/anothaDev/luci-theme-vantage.git
+src-git socat https://github.com/chenmozhijin/luci-app-socat.git
