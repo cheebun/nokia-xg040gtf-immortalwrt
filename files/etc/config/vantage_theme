@@ -1,0 +1,5 @@
+
+config appearance 'appearance'
+	option theme 'auto'
+	option brand 'hostname'
+	option unfocused 'still'
